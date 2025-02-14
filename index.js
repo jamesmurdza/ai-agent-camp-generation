@@ -36,9 +36,8 @@ const chatHistory = [
     },
 ];
 
-// Parse the LLM response response
+// Extract the action and action input from the LLM's response
 function parseAgentResponse(text) {
-    // Extract the action and action input from the LLM's response
     const lines = text.trim().split("\n");
     return {
         action: lines[0].split("Action:")[1].trim(),
@@ -57,10 +56,8 @@ function calculator(expression) {
     }
 }
 
-// Flag to indicate if the conversation is finished
+// Loop until the LLM has decided it's finished
 let finished = false;
-
-// Loop until the conversation is finished
 while (!finished) {
     // Call GPT, and add the response to memory.
     const responseText = await callGPT(chatHistory);
