@@ -144,6 +144,8 @@ This gives allows the assistant to try another time if it made the wrong choice.
 
 ## 5. Unlimited chances!
 
+Now, we make GPT guess again and again until it finally gets the correct response.
+
 <img src="chart-coconut-retries.svg " />
 
 ```javascript
@@ -177,7 +179,7 @@ while (!finished) {
 
 ## 6. **Defining a calculator**
 
-There is no AI, here, and that's the point. Instead of something silly like an imaginary machete, let's give the AI assistant something useful.
+There is no LLM involved in this code. This code takes a mathematical equation, evaluates it, and gives the result.
 
 <img src="chart-calculator.svg " />
 
@@ -197,7 +199,9 @@ This function safely evaluates a mathematical expression and returns the result 
 
 ---
 
-## 7. **An AI assistant plus a calculator**
+## 7. **Asking GPT to solve a math problem**
+
+Now, we ask GPT if it wants to use the calculator.
 
 ```javascript
 ...
@@ -227,6 +231,8 @@ const chatHistory = [
 
 ## 8. Picking a tool with input
 
+We can use this code to check what GPT decided to do.
+
 <img src="chart-parser.svg " />
 
 ```javascript
@@ -247,6 +253,8 @@ console.log(parsedResponse)
 ```
 
 ## 9. An AI assistant with tool use
+
+Finally, we've empowered GPT with a tool.
 
 <img src="chart-tool-use.svg " />
 
@@ -282,4 +290,4 @@ while (!finished) {
 }
 ```
 
-This loop will either invoke the calculator for mathematical queries or respond to the user with the assistant's chosen action.
+After each tool use, GPT can decide whether to continue or not. We can give it as many tools as we want!
