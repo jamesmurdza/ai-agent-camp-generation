@@ -1,6 +1,6 @@
 # Building an AI Agent from Scratch
 
-This script demonstrates various concepts for interacting with the OpenAI API, managing conversation history, and processing input. Below, we break down each key part of the script:
+We're going to build [this program](/blob/main/index.js) step-by-step.
 
 ## 1. **Calling GPT-4**
 
