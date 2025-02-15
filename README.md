@@ -6,6 +6,8 @@ This script demonstrates various concepts for interacting with the OpenAI API, m
 
 In this section, we make a simple API call to OpenAI using the provided client and log the result:
 
+<img src="chart-gpt.svg " />
+
 ```javascript
 import OpenAI from 'openai';
 
