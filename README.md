@@ -113,6 +113,8 @@ The assistant needs to decide on the correct object to answer the user's questio
 
 In this example, we check the action selected by the LLM and let it learn from the action's result:
 
+<img src="chart-coconut-try-again.svg " />
+
 ```javascript
 ...
 
