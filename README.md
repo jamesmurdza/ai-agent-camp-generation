@@ -118,16 +118,23 @@ In this example, we check the action selected by the LLM and let it learn from t
 ```javascript
 ...
 
+// Call GPT with the current chat history
 const responseText = await callGPT(chatHistory);
+// Add the response to the agent's memory
 chatHistory.push({ role: "assistant", content: responseText });
 console.log("Response from OpenAI:", responseText);
 
+// The LLM chose the correct tool!
 if (responseText.includes("Screwdriver")) {
-    console.log("Correct object chosen!");
-} else {
+    console.log("Correct object chosen!"); // We are finished.
+}
+// The LLM chose a different tool...
+else {
+    // Remember that we failed
     chatHistory.push({ role: "user", content: "Nope, try again!" });
     console.log("Incorrect object chosen. Asking again...");
-  
+
+    // Call GPT again
     const responseText2 = await callGPT(chatHistory);
     console.log("Response from OpenAI:", responseText2);
 }
@@ -145,14 +152,21 @@ This gives allows the assistant to try another time if it made the wrong choice.
 let finished = false;
 
 while (!finished) {
+    // Call GPT with the current chat history
     const responseText = await callGPT(chatHistory);
+    // Remember that we failed
     chatHistory.push({ role: "assistant", content: responseText });
     console.log("Response from OpenAI:", responseText);
 
+    // The LLM chose the correct tool!
     if (responseText.includes("Screwdriver")) {
+        // We are finished.
         console.log("Correct object chosen!");
         finished = true;
-    } else {
+    }
+    // The LLM chose a different tool...
+    else {
+        // Add the failure to the agent's memory
         chatHistory.push({ role: "user", content: "Nope, try again!" });
         console.log("Incorrect object chosen. Asking again...");
     }
@@ -218,16 +232,17 @@ const chatHistory = [
 ```javascript
 ...
 
+// Function to parse the action and action input
 function parseAgentResponse(text) {
-  const lines = text.trim().split('\n');
-  return {
-    action: lines[0].split('Action:')[1].trim(),
-    actionInput: lines[1].split('Action Input:')[1].trim()
-  };
+    const lines = text.trim().split('\n');
+    return {
+      action: lines[0].split('Action:')[1].trim(),
+      actionInput: lines[1].split('Action Input:')[1].trim()
+    };
 }
-
-const textResponse = callGPT(chatHistory);
-const parsedResponse = parseAgentResponse(textResponse);
+  
+const textResponse = callGPT(chatHistory); // Call GPT with the current chat history
+const parsedResponse = parseAgentResponse(textResponse); // Parse the agent's response
 console.log(parsedResponse)
 ```
 
@@ -240,22 +255,29 @@ console.log(parsedResponse)
 
 let finished = false;
 
+// Loop until the task is finished
 while (!finished) {
+  // Call GPT with the current chat history
   const responseText = await callGPT(chatHistory);
   console.log("Agent response:", responseText);
-  chatHistory.push({ role: "assistant", content: responseText })
+  chatHistory.push({ role: "assistant", content: responseText });
   
+  // Parse the agent's response to extract action and action input
   const { action, actionInput } = parseAgentResponse(responseText);
 
+  // Check if the action is to use the calculator
   if (action == "Calculator") {
+      // Calculate the result based on the action input
       const calcResult = calculator(actionInput);
-      chatHistory.push({ role: "user", content: `Observation: ${calcResult}` })
+      // Add the observation to the chat history as a user's message
+      chatHistory.push({ role: "user", content: `Observation: ${calcResult}` });
       console.log("Calculator result:", calcResult);
   }
   
+  // Check if the action is to respond to a human
   else if (action == "Response To Human") {
       console.log("Final response:", actionInput);
-      finished = true;
+      finished = true; // Stop because we are finished.
   }
 }
 ```
