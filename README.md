@@ -82,6 +82,8 @@ In this example, the assistant will respond in Spanish no matter what language t
 
 Here, we provide a task where the assistant must choose one object out of three options to solve a problem:
 
+<img src="chart-coconut.svg " />
+
 ```javascript
 ...
 
@@ -133,6 +135,8 @@ This gives allows the assistant to try another time if it made the wrong choice.
 
 ## 5. Unlimited chances!
 
+<img src="chart-coconut-retries.svg " />
+
 ```javascript
 ...
 
@@ -153,13 +157,13 @@ while (!finished) {
 }
 ```
 
-
-
 ---
 
 ## 6. **Defining a calculator**
 
 There is no AI, here, and that's the point. Instead of something silly like an imaginary machete, let's give the AI assistant something useful.
+
+<img src="chart-calculator.svg " />
 
 ```javascript
 import { evaluate } from 'mathjs';
@@ -207,6 +211,8 @@ const chatHistory = [
 
 ## 8. Picking a tool with input
 
+<img src="chart-parser.svg " />
+
 ```javascript
 ...
 
@@ -224,6 +230,8 @@ console.log(parsedResponse)
 ```
 
 ## 9. An AI assistant with tool use
+
+<img src="chart-tool-use.svg " />
 
 ```javascript
 ...
