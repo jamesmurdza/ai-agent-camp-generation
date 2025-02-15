@@ -1,6 +1,6 @@
 # Building an AI Agent from Scratch
 
-We're going to build [this program](/blob/main/index.js) step-by-step.
+We're going to build [this program](/index.js) step-by-step.
 
 ## 1. **Calling GPT-4**
 
