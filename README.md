@@ -29,14 +29,10 @@ const responseText = completion.choices[0].message.content;
 console.log("Response from OpenAI:", responseText);
 ```
 
-This sends a query about salsa, and then prints the model's response.
-
-## 2. Let's refactor a little
+This sends a query about salsa, and then prints the model's response. We can refactor this to be a little cleaner:
 
 ```javascript
-import OpenAI from 'openai';
-
-const client = new OpenAI();
+...
 
 async function callGPT(text) {
     const completion = await client.chat.completions.create({
@@ -52,12 +48,12 @@ const chatHistory = [
 
 const responseText = await callGPT(chatHistory)
 
-console.log("Response from OpenAI:", responseText);
+...
 ```
 
 ---
 
-## 3. **Using a system prompt**
+## 2. **Using a system prompt**
 
 The next step involves adding a **system prompt** that defines the behavior of the AI. In this case, we ask the assistant to always respond in Spanish:
 
@@ -82,7 +78,7 @@ In this example, the assistant will respond in Spanish no matter what language t
 
 ---
 
-## 4. **Having GPT-4 open a coconut**
+## 3. **Having GPT-4 open a coconut**
 
 Here, we provide a task where the assistant must choose one object out of three options to solve a problem:
 
@@ -111,7 +107,7 @@ The assistant needs to decide on the correct object to answer the user's questio
 
 ---
 
-## 5. **GPT deserves a second chance**
+## 4. **Give GPT a second chance**
 
 In this example, we check the action selected by the LLM and let it learn from the action's result:
 
@@ -135,7 +131,7 @@ if (responseText.includes("Screwdriver")) {
 
 This gives allows the assistant to try another time if it made the wrong choice.
 
-## 6. Unlimited chances!
+## 5. Unlimited chances!
 
 ```javascript
 ...
@@ -161,7 +157,7 @@ while (!finished) {
 
 ---
 
-## 7. **Defining a calculator**
+## 6. **Defining a calculator**
 
 There is no AI, here, and that's the point. Instead of something silly like an imaginary machete, let's give the AI assistant something useful.
 
@@ -181,7 +177,7 @@ This function safely evaluates a mathematical expression and returns the result 
 
 ---
 
-## 8. **An AI assistant plus a calculator**
+## 7. **An AI assistant plus a calculator**
 
 ```javascript
 ...
@@ -209,7 +205,7 @@ const chatHistory = [
 ];
 ```
 
-## 9. Picking a tool with input
+## 8. Picking a tool with input
 
 ```javascript
 ...
@@ -227,7 +223,7 @@ const parsedResponse = parseAgentResponse(textResponse);
 console.log(parsedResponse)
 ```
 
-## 10. The end
+## 9. An AI assistant with tool use
 
 ```javascript
 ...
@@ -241,15 +237,15 @@ while (!finished) {
   
   const { action, actionInput } = parseAgentResponse(responseText);
 
-  if (action.trim() == "Calculator") {
+  if (action == "Calculator") {
       const calcResult = calculator(actionInput);
       chatHistory.push({ role: "user", content: `Observation: ${calcResult}` })
       console.log("Calculator result:", calcResult);
   }
   
-  else if (action.trim() == "Response To Human") {
+  else if (action == "Response To Human") {
       console.log("Final response:", actionInput);
-	    finished = true;
+      finished = true;
   }
 }
 ```
