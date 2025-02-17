@@ -1,5 +1,5 @@
 import OpenAI from "openai"; // Import the OpenAI library for AI functionality
-import mathjs from "mathjs"; // Import mathjs for mathematical evaluations
+import { evaluate } from "mathjs"; // Import mathjs for mathematical evaluations
 import readline from "readline"; // For user input in the terminal
 
 // Initialize a new OpenAI client
@@ -49,7 +49,7 @@ function parseAgentResponse(text) {
 // Function to evaluate mathematical expressions
 function calculator(expression) {
     try {
-        return mathjs.evaluate(expression); // Uses mathjs to evaluate the expression
+        return evaluate(expression); // Uses mathjs to evaluate the expression
     } catch (e) {
         return `Error in calculation: ${e}`; // Return error message if calculation fails
     }
