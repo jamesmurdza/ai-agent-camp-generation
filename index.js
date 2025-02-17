@@ -1,6 +1,6 @@
-const OpenAI = require("openai"); // Import the OpenAI library for AI functionality
-const mathjs = require("mathjs"); // Import mathjs for mathematical evaluations
-const readline = require("readline"); // For user input in the terminal
+import OpenAI from "openai"; // Import the OpenAI library for AI functionality
+import mathjs from "mathjs"; // Import mathjs for mathematical evaluations
+import readline from "readline"; // For user input in the terminal
 
 // Initialize a new OpenAI client
 const client = new OpenAI();
